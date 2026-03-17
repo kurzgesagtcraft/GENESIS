@@ -1,0 +1,152 @@
+# GENESIS World Configuration
+# 世界配置文件 - 定义仿真环境的所有区域和参数
+
+world:
+  name: "genesis_world"
+  size: [50.0, 50.0]  # meters
+  gravity: [0, 0, -9.81]
+  time_step: 0.002  # 500Hz physics
+  render_fps: 30
+  
+  # 地形设置
+  terrain:
+    type: "flat"  # flat / heightfield / mesh
+    friction: 0.7
+    restitution: 0.1
+    
+  # 光照设置
+  lighting:
+    type: "outdoor"
+    sun_intensity: 1.0
+    ambient_intensity: 0.3
+    sun_direction: [0.5, 0.5, -1.0]
+
+# 区域定义
+zones:
+  # 矿区 - 铁矿
+  mine_iron:
+    type: "mine"
+    position: [5, 35, 0]
+    size: [8, 8, 0.5]
+    resource_type: "iron_ore"
+    total_units: 500
+    respawn: false
+    terrain_roughness: 0.3
+    
+  # 矿区 - 硅矿
+  mine_silicon:
+    type: "mine"
+    position: [20, 35, 0]
+    size: [6, 6, 0.5]
+    resource_type: "silicon_ore"
+    total_units: 300
+    respawn: false
+    terrain_roughness: 0.2
+    
+  # 太阳能发电区
+  solar_array:
+    type: "energy_source"
+    position: [5, 45, 0]
+    size: [10, 5, 3]
+    energy_output_per_sec: 100  # Watts (simulated)
+    efficiency: 0.85
+    day_night_cycle: true
+    day_length: 86400  # seconds (24 hours)
+    
+  # 冶炼站
+  processing_station:
+    type: "workstation"
+    station_type: "smelter"
+    position: [5, 15, 0]
+    size: [4, 4, 3]
+    input_port_offset: [0, -1, 0.5]
+    output_port_offset: [0, 1, 0.5]
+    
+  # 制造站
+  fabrication_station:
+    type: "workstation"
+    station_type: "cnc_3dprint"
+    position: [25, 15, 0]
+    size: [5, 5, 2.5]
+    input_port_offset: [-1, 0, 0.5]
+    output_port_offset: [1, 0, 0.5]
+    
+  # 装配站
+  assembly_station:
+    type: "workstation"
+    station_type: "assembly"
+    position: [35, 5, 0]
+    size: [6, 6, 2]
+    input_port_offset: [0, -1, 0.3]
+    output_port_offset: [0, 1, 0.3]
+    
+  # 充电站
+  charging_dock:
+    type: "charging"
+    position: [5, 5, 0]
+    size: [2, 2, 1.5]
+    charge_rate: 50  # Watts
+    detection_radius: 0.5
+    
+  # 仓库
+  warehouse:
+    type: "storage"
+    position: [20, 5, 0]
+    size: [8, 6, 4]
+    capacity: 200  # items
+    slot_grid: [4, 3, 2]  # 4x3x2 slots
+    
+  # 机器人出生点
+  robot_spawn:
+    type: "spawn"
+    position: [40, 40, 0.1]
+    orientation: [0, 0, 0]  # euler angles
+
+# 道路网络
+path_network:
+  type: "grid"
+  width: 1.5  # meters
+  nodes:
+    - id: "spawn"
+      position: [40, 40]
+    - id: "mine_iron_center"
+      position: [5, 35]
+    - id: "mine_silicon_center"
+      position: [20, 35]
+    - id: "smelter_center"
+      position: [5, 15]
+    - id: "fabricator_center"
+      position: [25, 15]
+    - id: "assembly_center"
+      position: [35, 5]
+    - id: "warehouse_center"
+      position: [20, 5]
+    - id: "charging_center"
+      position: [5, 5]
+    - id: "solar_center"
+      position: [5, 45]
+  edges:
+    - ["spawn", "mine_iron_center"]
+    - ["spawn", "mine_silicon_center"]
+    - ["mine_iron_center", "smelter_center"]
+    - ["mine_silicon_center", "fabricator_center"]
+    - ["smelter_center", "fabricator_center"]
+    - ["fabricator_center", "assembly_center"]
+    - ["assembly_center", "warehouse_center"]
+    - ["warehouse_center", "charging_center"]
+    - ["charging_center", "smelter_center"]
+    - ["mine_iron_center", "solar_center"]
+
+# 物理参数
+physics:
+  solver: "newton"  # newton / mujoco / physx
+  solver_iterations: 10
+  contact_offset: 0.005
+  rest_offset: 0.001
+  
+# 视觉参数
+rendering:
+  backend: "opengl"  # opengl / vulkan
+  antialiasing: 4
+  shadows: true
+  reflections: false  # 性能优化

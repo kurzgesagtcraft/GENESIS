@@ -1,0 +1,269 @@
+# GENESIS Robot Configuration
+# 机器人配置文件 - 定义 GENESIS-Bot v1 的所有参数
+
+robot:
+  name: "genesis_bot_v1"
+  type: "mobile_manipulator"
+  
+# 移动底盘
+base:
+  type: "differential"  # differential / omni / ackermann
+  geometry:
+    length: 0.6  # meters
+    width: 0.4
+    height: 0.15
+  wheels:
+    count: 4
+    radius: 0.08
+    width: 0.04
+    wheel_base: 0.5  # distance between left/right wheels
+    axle_length: 0.45  # distance between front/back wheels
+  dynamics:
+    max_linear_speed: 1.5  # m/s
+    max_angular_speed: 1.0  # rad/s
+    max_linear_accel: 0.5  # m/s^2
+    max_angular_accel: 1.0  # rad/s^2
+    mass: 15.0  # kg
+    load_capacity: 20.0  # kg
+  control:
+    type: "velocity"  # velocity / torque
+    pid:
+      kp: 1.0
+      ki: 0.1
+      kd: 0.01
+
+# 躯干
+torso:
+  height: 0.8  # meters
+  geometry:
+    type: "cylinder"
+    radius: 0.1
+    height: 0.8
+  mass: 5.0  # kg
+
+# 手臂配置 (双臂)
+arms:
+  left:
+    name: "left_arm"
+    type: "serial_6dof"
+    base_position: [0, 0.2, 0.15]  # relative to torso top
+    base_orientation: [0, 0, 0]
+  right:
+    name: "right_arm"
+    type: "serial_6dof"
+    base_position: [0, -0.2, 0.15]
+    base_orientation: [0, 0, 0]
+  
+  # 通用手臂参数
+  arm_params:
+    reach: 0.7  # meters
+    payload: 5.0  # kg
+    dof: 6
+    
+    # 关节定义 (从基座到末端)
+    joints:
+      - name: "joint_1"
+        type: "revolute"
+        axis: [0, 0, 1]
+        limits: [-3.14159, 3.14159]  # rad
+        max_velocity: 2.0  # rad/s
+        max_effort: 50.0  # Nm
+      - name: "joint_2"
+        type: "revolute"
+        axis: [0, 1, 0]
+        limits: [-1.57, 1.57]
+        max_velocity: 2.0
+        max_effort: 50.0
+      - name: "joint_3"
+        type: "revolute"
+        axis: [0, 1, 0]
+        limits: [-2.5, 2.5]
+        max_velocity: 2.0
+        max_effort: 40.0
+      - name: "joint_4"
+        type: "revolute"
+        axis: [0, 0, 1]
+        limits: [-3.14159, 3.14159]
+        max_velocity: 3.0
+        max_effort: 20.0
+      - name: "joint_5"
+        type: "revolute"
+        axis: [0, 1, 0]
+        limits: [-2.0, 2.0]
+        max_velocity: 3.0
+        max_effort: 20.0
+      - name: "joint_6"
+        type: "revolute"
+        axis: [0, 0, 1]
+        limits: [-3.14159, 3.14159]
+        max_velocity: 4.0
+        max_effort: 10.0
+    
+    # 连杆参数
+    links:
+      - name: "link_1"
+        length: 0.0
+        mass: 2.0
+        inertia: [0.01, 0.01, 0.01]
+      - name: "link_2"
+        length: 0.3
+        mass: 1.5
+        inertia: [0.008, 0.008, 0.008]
+      - name: "link_3"
+        length: 0.25
+        mass: 1.2
+        inertia: [0.006, 0.006, 0.006]
+      - name: "link_4"
+        length: 0.0
+        mass: 0.8
+        inertia: [0.003, 0.003, 0.003]
+      - name: "link_5"
+        length: 0.15
+        mass: 0.6
+        inertia: [0.002, 0.002, 0.002]
+      - name: "link_6"
+        length: 0.1
+        mass: 0.4
+        inertia: [0.001, 0.001, 0.001]
+
+# 夹爪配置 (双夹爪)
+grippers:
+  left:
+    name: "left_gripper"
+    type: "parallel_2finger"
+    mount_frame: "left_arm_tool0"
+  right:
+    name: "right_gripper"
+    type: "parallel_2finger"
+    mount_frame: "right_arm_tool0"
+  
+  # 通用夹爪参数
+  gripper_params:
+    open_width: 0.1  # meters
+    close_width: 0.0
+    max_force: 50.0  # N
+    max_velocity: 0.1  # m/s
+    finger_length: 0.15
+    finger_width: 0.02
+    finger_depth: 0.02
+    
+    # 接触传感器
+    contact_sensors: true
+    contact_threshold: 0.5  # N
+
+# 传感器配置
+sensors:
+  # 头部 RGB-D 相机
+  head_camera:
+    type: "rgb_d"
+    mount_frame: "head_camera_link"
+    mount_position: [0.1, 0, 0.75]  # relative to torso
+    mount_orientation: [0, 0.3, 0]  # pitch down 17 degrees
+    resolution: [640, 480]
+    fov: 70  # degrees
+    depth_range: [0.1, 10.0]  # meters
+    fps: 30
+    
+  # 腕部相机 (左)
+  left_wrist_camera:
+    type: "rgb_d"
+    mount_frame: "left_arm_tool0"
+    mount_position: [0.05, 0, 0]
+    mount_orientation: [0, 1.57, 0]  # facing forward
+    resolution: [320, 240]
+    fov: 90
+    depth_range: [0.05, 2.0]
+    fps: 30
+    
+  # 腕部相机 (右)
+  right_wrist_camera:
+    type: "rgb_d"
+    mount_frame: "right_arm_tool0"
+    mount_position: [0.05, 0, 0]
+    mount_orientation: [0, 1.57, 0]
+    resolution: [320, 240]
+    fov: 90
+    depth_range: [0.05, 2.0]
+    fps: 30
+    
+  # IMU
+  imu:
+    mount_frame: "base_link"
+    mount_position: [0, 0, 0.1]
+    update_rate: 200  # Hz
+    noise:
+      gyro_std: 0.01  # rad/s
+      accel_std: 0.1  # m/s^2
+      
+  # 力/力矩传感器 (左腕)
+  left_ft_sensor:
+    type: "6axis_ft"
+    mount_frame: "left_arm_tool0"
+    update_rate: 1000  # Hz
+    max_force: 100  # N
+    max_torque: 10  # Nm
+    noise_std: [0.1, 0.1, 0.1, 0.01, 0.01, 0.01]  # Fx, Fy, Fz, Tx, Ty, Tz
+    
+  # 力/力矩传感器 (右腕)
+  right_ft_sensor:
+    type: "6axis_ft"
+    mount_frame: "right_arm_tool0"
+    update_rate: 1000
+    max_force: 100
+    max_torque: 10
+    noise_std: [0.1, 0.1, 0.1, 0.01, 0.01, 0.01]
+
+# 电池系统
+battery:
+  capacity: 500  # Wh
+  initial_soc: 1.0  # 0-1
+  critical_soc: 0.15
+  
+  # 功耗模型
+  power_consumption:
+    idle: 10  # W
+    mobile: 50  # W (when moving)
+    manipulation: 80  # W (when operating arms)
+    perception: 20  # W (cameras + processing)
+    
+  # 充电参数
+  charging:
+    max_rate: 50  # W
+    efficiency: 0.9
+
+# 控制参数
+control:
+  # 运动规划
+  planning:
+    planner: "RRTConnect"  # RRTConnect / PRM / IK
+    planning_time: 0.5  # seconds
+    position_tolerance: 0.001  # meters
+    orientation_tolerance: 0.01  # radians
+    
+  # 轨迹执行
+  trajectory:
+    type: "quintic"  # linear / cubic / quintic
+    velocity_scaling: 0.5
+    acceleration_scaling: 0.3
+    
+  # 阻抗控制 (用于装配)
+  impedance:
+    stiffness: [500, 500, 500, 50, 50, 50]  # N/m, Nm/rad
+    damping: [50, 50, 50, 5, 5, 5]  # Ns/m, Nms/rad
+    
+# 安全参数
+safety:
+  # 碰撞检测
+  collision_checking: true
+  self_collision_margin: 0.05  # meters
+  environment_collision_margin: 0.02
+  
+  # 力限制
+  max_contact_force: 100  # N
+  max_joint_torque: 1.2  # ratio of max_effort
+  
+  # 工作空间限制
+  workspace:
+    x_range: [-1.0, 1.0]
+    y_range: [-1.0, 1.0]
+    z_range: [0.0, 1.5]
