@@ -97,6 +97,7 @@ Issues = "https://github.com/your-org/genesis-sim/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["genesis*", "control*", "perception*"]
 
 [tool.setuptools.package-data]
 genesis = ["py.typed", "*.yaml", "*.json"]
