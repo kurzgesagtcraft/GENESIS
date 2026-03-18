@@ -1,0 +1,170 @@
+<mxfile host="app.diagrams.net" modified="2026-03-18T02:57:00.000Z" agent="GENESIS" version="21.0.0" etag="genesis-world-v1" type="device">
+  <diagram name="GENESIS World Layout" id="genesis-world-50x50">
+    <mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- World Boundary (50m x 50m) -->
+        <mxCell id="world_boundary" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;strokeWidth=3;fillColor=none;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="500" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="world_label" value="GENESIS World (50m × 50m)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Scale Reference -->
+        <mxCell id="scale" value="← 10m →" style="endArrow=none;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="50" y="570" as="sourcePoint" />
+            <mxPoint x="150" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Solar Panel Array (NW) - 10m×5m -->
+        <mxCell id="solar_array" value="☀️ Solar Panel Array&#xa;(10m × 5m)&#xa;100W output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="100" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Mine Zone A - Iron Ore (8m×8m) -->
+        <mxCell id="mine_iron" value="⛏️ Mine Zone A&#xa;(Iron Ore)&#xa;8m × 8m&#xa;500 units" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="150" width="80" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- Mine Zone B - Silicon Ore (6m×6m) -->
+        <mxCell id="mine_silicon" value="⛏️ Mine Zone B&#xa;(Silicon Ore)&#xa;6m × 6m&#xa;300 units" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="170" y="150" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Processing Station - Smelter (4m×4m) -->
+        <mxCell id="smelter" value="🏭 Processing&#xa;(Smelter)&#xa;4m × 4m" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="350" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Fabrication Station (5m×5m) -->
+        <mxCell id="fabricator" value="🔧 Fabrication&#xa;(CNC/3D Print)&#xa;5m × 5m" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="230" y="350" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Assembly Station (6m×6m) -->
+        <mxCell id="assembly" value="🧩 Assembly&#xa;Station&#xa;6m × 6m" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="330" y="450" width="60" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Charging Dock (2m×2m) -->
+        <mxCell id="charging" value="🔋 Charging&#xa;Dock&#xa;50W" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="450" width="20" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Warehouse (8m×6m) -->
+        <mxCell id="warehouse" value="📦 Warehouse&#xa;8m × 6m&#xa;Capacity: 200" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DEEBF7;strokeColor=#1E88E5;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="170" y="450" width="80" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Robot Spawn Point -->
+        <mxCell id="spawn" value="🤖 Robot&#xa;Spawn" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;strokeWidth=2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Path Network -->
+        <mxCell id="path_spawn_mine_iron" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="140" as="sourcePoint" />
+            <mxPoint x="90" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_spawn_mine_silicon" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="140" as="sourcePoint" />
+            <mxPoint x="200" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_mine_smelter" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="230" as="sourcePoint" />
+            <mxPoint x="70" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_smelter_fabricator" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="370" as="sourcePoint" />
+            <mxPoint x="230" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_fabricator_assembly" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="280" y="400" as="sourcePoint" />
+            <mxPoint x="330" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_assembly_warehouse" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="480" as="sourcePoint" />
+            <mxPoint x="250" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_warehouse_charging" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="480" as="sourcePoint" />
+            <mxPoint x="70" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="path_mine_solar" value="" style="endArrow=none;html=1;strokeWidth=3;strokeColor=#9E9E9E;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="150" as="sourcePoint" />
+            <mxPoint x="100" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Legend -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="250" width="130" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_title" value="图例 Legend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="445" y="255" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_path" value="━━ 道路网络" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="280" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_mine" value="⛏️ 矿区" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="300" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_station" value="🏭 工站" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="320" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_energy" value="☀️ 能源" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="340" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_storage" value="📦 存储" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="360" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_charge" value="🔋 充电" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="380" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_robot" value="🤖 机器人" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9" vertex="1" parent="1">
+          <mxGeometry x="430" y="400" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Coordinate Labels -->
+        <mxCell id="coord_0_0" value="(0,0)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="35" y="545" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="coord_50_50" value="(50,50)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;fontColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="520" y="50" width="35" height="15" as="geometry" />
+        </mxCell>
+        
+        <!-- North Arrow -->
+        <mxCell id="north_arrow" value="N ↑" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#333333" vertex="1" parent="1">
+          <mxGeometry x="560" y="280" width="30" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

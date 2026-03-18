@@ -22,8 +22,44 @@ Array = NDArray[np.floating]
 # 基础几何类型
 Point2D = Tuple[Float, Float]
 Point3D = Tuple[Float, Float, Float]
-Quaternion = Tuple[Float, Float, Float, Float]  # (w, x, y, z)
-Color = Tuple[Float, Float, Float, Float]  # RGBA, 0-1
+Quaternion = Tuple[Float, Float, Float, Float] # (w, x, y, z)
+
+
+@dataclass
+class Position3D:
+  """3D位置数据类"""
+  x: float = 0.0
+  y: float = 0.0
+  z: float = 0.0
+  
+  def to_tuple(self) -> Tuple[float, float, float]:
+    return (self.x, self.y, self.z)
+  
+  def to_array(self) -> np.ndarray:
+    return np.array([self.x, self.y, self.z])
+  
+  @classmethod
+  def from_tuple(cls, t: Tuple[float, float, float]) -> "Position3D":
+    return cls(x=t[0], y=t[1], z=t[2])
+
+
+@dataclass
+class Color:
+  """RGBA颜色数据类"""
+  r: float = 0.0
+  g: float = 0.0
+  b: float = 0.0
+  a: float = 1.0
+  
+  def to_tuple(self) -> Tuple[float, float, float, float]:
+    return (self.r, self.g, self.b, self.a)
+  
+  def to_array(self) -> np.ndarray:
+    return np.array([self.r, self.g, self.b, self.a])
+  
+  @classmethod
+  def from_tuple(cls, t: Tuple[float, float, float, float]) -> "Color":
+    return cls(r=t[0], g=t[1], b=t[2], a=t[3] if len(t) > 3 else 1.0)
 
 
 @dataclass

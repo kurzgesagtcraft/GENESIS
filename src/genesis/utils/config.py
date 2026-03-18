@@ -179,18 +179,36 @@ def load_config(
 def merge_configs(*configs: Config) -> Config:
     """
     合并多个配置对象。
-    
+
     后面的配置会覆盖前面的配置。
-    
+
     Args:
         *configs: 配置对象列表
-        
+
     Returns:
         合并后的配置对象
     """
     if len(configs) == 0:
         return Config()
-    
+
     cfg_list = [c._cfg for c in configs]
     merged = OmegaConf.merge(*cfg_list)
     return Config(merged)
+
+
+class Configurable:
+    """
+    可配置基类
+    
+    所有需要配置管理的类可以继承此类,
+    提供 from_config 和 to_dict 方法。
+    """
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """序列化为字典"""
+        raise NotImplementedError
+    
+    @classmethod
+    def from_config(cls, config_dict: Dict[str, Any]) -> "Configurable":
+        """从配置字典创建"""
+        raise NotImplementedError
