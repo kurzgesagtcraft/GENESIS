@@ -26,21 +26,57 @@ Quaternion = Tuple[Float, Float, Float, Float] # (w, x, y, z)
 
 
 @dataclass
+class Pose2D:
+    """
+    2D 位姿数据类。
+    
+    Attributes:
+        x: x 坐标 (m)
+        y: y 坐标 (m)
+        yaw: 朝向角 (rad)
+    """
+    x: float = 0.0
+    y: float = 0.0
+    yaw: float = 0.0
+
+    def to_tuple(self) -> Tuple[float, float, float]:
+        """返回 (x, y, yaw) 元组。"""
+        return (self.x, self.y, self.yaw)
+
+    def to_array(self) -> np.ndarray:
+        """返回 numpy 数组。"""
+        return np.array([self.x, self.y, self.yaw])
+
+    @classmethod
+    def from_tuple(cls, t: Tuple[float, float, float]) -> "Pose2D":
+        """从元组创建。"""
+        return cls(x=t[0], y=t[1], yaw=t[2] if len(t) > 2 else 0.0)
+
+    def distance_to(self, other: "Pose2D") -> float:
+        """计算到另一个位姿的平面距离。"""
+        return np.sqrt((self.x - other.x) ** 2 + (self.y - other.y) ** 2)
+
+    def angle_to(self, other: "Pose2D") -> float:
+        """计算到另一个位姿的角度差。"""
+        return np.arctan2(other.y - self.y, other.x - self.x)
+
+
+@dataclass
 class Position3D:
-  """3D位置数据类"""
-  x: float = 0.0
-  y: float = 0.0
-  z: float = 0.0
-  
-  def to_tuple(self) -> Tuple[float, float, float]:
-    return (self.x, self.y, self.z)
-  
-  def to_array(self) -> np.ndarray:
-    return np.array([self.x, self.y, self.z])
-  
-  @classmethod
-  def from_tuple(cls, t: Tuple[float, float, float]) -> "Position3D":
-    return cls(x=t[0], y=t[1], z=t[2])
+    """3D位置数据类"""
+    x: float = 0.0
+    y: float = 0.0
+    z: float = 0.0
+
+    def to_tuple(self) -> Tuple[float, float, float]:
+        return (self.x, self.y, self.z)
+
+    def to_array(self) -> np.ndarray:
+        return np.array([self.x, self.y, self.z])
+
+    @classmethod
+    def from_tuple(cls, t: Tuple[float, float, float]) -> "Position3D":
+        return cls(x=t[0], y=t[1], z=t[2])
 
 
 @dataclass
