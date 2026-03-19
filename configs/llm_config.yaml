@@ -1,0 +1,15 @@
+# GENESIS LLM 配置
+# NVIDIA NIM API (OpenAI 兼容)
+
+llm:
+  provider: "openai"
+  model: "qwen/qwen3.5-397b-a17b"
+  api_key: ""
+  base_url: "https://integrate.api.nvidia.com/v1"
+  temperature: 0.3
+  max_tokens: 4096
+  timeout: 60.0
+  retry_count: 3
+  retry_delay: 1.0
+  enable_cache: true
+  cache_ttl: 3600.0
